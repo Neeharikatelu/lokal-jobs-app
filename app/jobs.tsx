@@ -1,10 +1,45 @@
-// app/jobs.tsx
+// // app/jobs.tsx
 import { View, Text, Image, ScrollView, StyleSheet, Pressable } from 'react-native';
 import React, { useState,useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import Hoverable from 'react-native-web-hover';
 import { useBookmarks } from './bookmark';
+// import * as SQLite from 'expo-sqlite';
+
+
+// const db = (SQLite as any).openDatabase('bookmarks.db');
+
+
+// type SQLTransaction = {
+//   executeSql: (
+//     sqlStatement: string,
+//     args?: any[],
+//     callback?: (transaction: any, resultSet: any) => void,
+//     errorCallback?: (transaction: any, error: any) => void
+//   ) => void;
+// };
+
+type Job = {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  experience: string;
+  stipend: string;
+  description: string;
+  image: string;
+  skills?: string[]; // Optional
+  benefits?: string[]; // Optional
+};
+
+// useEffect(() => {
+//   db.transaction((tx: SQLTransaction) => {
+//     tx.executeSql(
+//       'CREATE TABLE IF NOT EXISTS bookmarks (id TEXT PRIMARY KEY, title TEXT, company TEXT, location TEXT, experience TEXT, stipend TEXT, description TEXT, image TEXT);'
+//     );
+//   });
+// }, []);
 
 // const response = await fetch('https://testapi.getlokalapp.com/common/jobs?page=1');
 // const data = await response.json();
@@ -292,7 +327,7 @@ const jobs = [
   },
 
   {
-    id: '24',
+    id: '22',
     title: 'Graphic Designer',
     company: 'BYJU’S',
     location: 'Bangalore',
@@ -305,7 +340,7 @@ const jobs = [
   },
 
   {
-    id: '25',
+    id: '23',
     title: 'Marketing Associate',
     company: 'Zomato',
     location: 'Gurgaon',
@@ -318,7 +353,7 @@ const jobs = [
   },
 
   {
-  id: '26',
+  id: '24',
   title: '                HR',
   company: 'Infosys',
   location: 'Pune',
@@ -331,7 +366,7 @@ const jobs = [
 },
 
 {
-  id: '27',
+  id: '25',
   title: 'Business Analyst',
   company: 'Deloitte',
   location: 'Hyderabad',
@@ -345,7 +380,7 @@ const jobs = [
 
 
 {
-  id: '28',
+  id: '26',
   title: 'Associate Product Manager',
   company: 'Flipkart',
   location: 'Bangalore',
@@ -358,7 +393,7 @@ const jobs = [
 },
 
 {
-  id: '29',
+  id: '27',
   title: 'Marketing Intern',
   company: 'Unacademy',
   location: 'Remote',
@@ -371,7 +406,7 @@ const jobs = [
 },
 
 {
-  id: '30',
+  id: '28',
   title: 'Frontend Developer Intern (React.js)',
   company: 'Zerodha',
   location: 'Bangalore (Hybrid)',
@@ -385,7 +420,7 @@ const jobs = [
 
 
 {
-  id: '31',
+  id: '29',
   title: 'Angular Developer Intern',
   company: 'Tech Mahindra',
   location: 'Pune',
@@ -398,7 +433,7 @@ const jobs = [
 },
 
 {
-  id: '32',
+  id: '30',
   title: 'Frontend Intern (Next.js)',
   company: 'Razorpay',
   location: 'Remote',
@@ -411,7 +446,7 @@ const jobs = [
 },
 
 {
-  id: '33',
+  id: '31',
   title: 'Full Stack Web Developer Intern',
   company: 'CRED',
   location: 'Remote',
@@ -424,7 +459,7 @@ const jobs = [
 },
 
 {
-  id: '41',
+  id: '32',
   title: 'AI/ML Intern',
   company: 'Tata Elxsi',
   location: 'Bangalore',
@@ -444,22 +479,23 @@ const Jobs = () => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   const { bookmarkedJobs,toggleBookmark} = useBookmarks();
+ 
 
-  // const [jobs, setJobs] = useState([]); 
+//   const [jobs, setJobs] = useState([]); 
 
-  // useEffect(() => {
-  //   const fetchJobs = async () => {
-  //     try {
-  //       const response = await fetch('https://testapi.getlokalapp.com/common/jobs?page=1');
-  //       const data = await response.json();
-  //       setJobs(data.jobs); // Assuming the API response has a `jobs` field
-  //     } catch (error) {
-  //       console.error('Error fetching jobs:', error);
-  //     }
-  //   };
+//   useEffect(() => {
+//     const fetchJobs = async () => {
+//       try {
+//         const response = await fetch('https://testapi.getlokalapp.com/common/jobs?page=1');
+//         const data = await response.json();
+//         setJobs(data.jobs); // Assuming the API response has a `jobs` field
+//       } catch (error) {
+//         console.error('Error fetching jobs:', error);
+//       }
+//     };
 
-  //   fetchJobs();
-  // }, []);
+//     fetchJobs();
+//   }, []);
 
 
   // const toggleBookmark = (id: string) => {
@@ -468,13 +504,66 @@ const Jobs = () => {
   //   );
   // };
 
-  
+
+
+  // const saveBookmark = (job: Job) => {
+  //   db.transaction((tx:SQLTransaction) => {
+  //     tx.executeSql(
+  //       'INSERT INTO bookmarks (id, title, company, location, experience, stipend, description, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?);',
+  //       [
+  //         job.id,
+  //         job.title,
+  //         job.company,
+  //         job.location,
+  //         job.experience,
+  //         job.stipend,
+  //         job.description,
+  //         job.image,
+  //       ],
+  //       () => {
+  //         console.log('Job bookmarked successfully!');
+  //         setBookmarked((prev) => [...prev, job.id]); // Update state
+  //       },
+  //       (_, error) => {
+  //         console.error('Error saving bookmark:', error);
+  //         return false;
+  //       }
+  //     );
+  //   });
+  // };
+
+  // const removeBookmark = (jobId: string) => {
+  //   db.transaction((tx: SQLTransaction) => {
+  //     tx.executeSql(
+  //       'DELETE FROM bookmarks WHERE id = ?;',
+  //       [jobId],
+  //       () => {
+  //         console.log('Job removed from bookmarks!');
+  //         setBookmarked((prev) => prev.filter((id) => id !== jobId)); // Update state
+  //       },
+  //       (_, error) => {
+  //         console.error('Error removing bookmark:', error);
+  //         return false;
+  //       }
+  //     );
+  //   });
+  // };
+
+
+  // const toggleBookmark = (job: Job) => {
+  //   if (bookmarked.includes(job.id)) {
+  //     removeBookmark(job.id);
+  //   } else {
+  //     saveBookmark(job);
+  //   }
+  // };
+
  
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {jobs.map((job) => (
         <Pressable
-          // onPressIn={() => setHoveredCard(job.id)}
+          onPressIn={() => setHoveredCard(job.id)}
           key={job.id}
           style={({ pressed }) => [
             styles.card,

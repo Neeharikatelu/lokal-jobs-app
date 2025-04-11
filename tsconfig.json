@@ -4,10 +4,9 @@
     "strict": true,
     "module": "es2022",
     "target": "es2017",
+    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@@utils/*": ["app/utils/*"]
     }
   },
   "extends": "expo/tsconfig.base",
