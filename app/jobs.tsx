@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import Hoverable from 'react-native-web-hover';
+import { useBookmarks } from './bookmark';
+
+// import { useBookmarks } from '../context/bookmarksContext'; // adjust path as needed
 
 
 
@@ -68,7 +71,7 @@ const jobs = [
     description: 'Design intuitive, engaging user interfaces and experiences for Adobe products. Collaborate with developers and product managers to turn ideas into elegant user flows and prototypes. Conduct user research to improve usability and accessibility.',
     skills: ['Figma', 'Adobe XD', 'Wireframing', 'User Research', 'Prototyping'],
     benefits: ['Health Insurance', 'Hybrid Work Policy', 'Creative Environment', 'Design Conferences Access'],
-    image: 'https://cdn-icons-png.flaticon.com/512/11360/11360439.png',
+    image: 'https://cdn-icons-png.flaticon.com/512/8448/8448634.png',
   },
   
   {
@@ -272,17 +275,22 @@ const Jobs = () => {
   const [bookmarked, setBookmarked] = useState<string[]>([]);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  const toggleBookmark = (id: string) => {
-    setBookmarked((prev) =>
-      prev.includes(id) ? prev.filter((jobId) => jobId !== id) : [...prev, id]
-    );
-  };
+  const { bookmarkedJobs,toggleBookmark} = useBookmarks();
 
+
+  // const toggleBookmark = (id: string) => {
+  //   setBookmarked((prev) =>
+  //     prev.includes(id) ? prev.filter((jobId) => jobId !== id) : [...prev, id]
+  //   );
+  // };
+
+  
+ 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {jobs.map((job) => (
         <Pressable
-          onPressIn={() => setHoveredCard(job.id)}
+          // onPressIn={() => setHoveredCard(job.id)}
           key={job.id}
           style={({ pressed }) => [
             styles.card,
@@ -312,8 +320,6 @@ const Jobs = () => {
                   },
                 }}
 
-
-
               style={styles.link}
             >
               View Details
@@ -322,13 +328,22 @@ const Jobs = () => {
 
           </View>
           <Pressable
-            onPress={() => toggleBookmark(job.id)}
+            onPress={() => toggleBookmark(job)}
             style={styles.bookmarkBtn}
           >
             <Ionicons
-              name={bookmarked.includes(job.id) ? 'bookmark' : 'bookmark-outline'}
+              // name={bookmarked.includes(job.id) ? 'bookmark' : 'bookmark-outline'}
+              // size={24}
+              // color="#4e91ff"
+
+              name={
+                bookmarkedJobs.some((b) => b.id === job.id)
+                  ? 'bookmark'
+                  : 'bookmark-outline'
+              }
               size={24}
               color="#4e91ff"
+              
             />
           </Pressable>
         </Pressable>
@@ -403,4 +418,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#4e91ff',
   },
+
 });

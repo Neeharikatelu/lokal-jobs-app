@@ -1,3 +1,6 @@
+// app/bookmark.tsx
+// This file contains the BookmarkProvider and useBookmarks hook for managing bookmarks
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Job = {

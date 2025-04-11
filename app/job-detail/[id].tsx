@@ -2,7 +2,10 @@ import { useLocalSearchParams } from 'expo-router';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const JobDetail = () => {
+  
   const { title, location,company, salary, phone, description,experience, skills,benefits } = useLocalSearchParams();
+
+ 
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -25,6 +28,10 @@ const JobDetail = () => {
 };
 
 export default JobDetail;
+
+export const config = {
+  headerShown: false,
+};
 
 const styles = StyleSheet.create({
   container: {

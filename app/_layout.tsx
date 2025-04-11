@@ -3,6 +3,8 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { BookmarkProvider } from './bookmark';
 
+
+
 export default function Layout() {
   return (
     <BookmarkProvider>
@@ -17,7 +19,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="jobs/index"
+        name="jobs"
         options={{
           title: 'Jobs',
           tabBarIcon: ({ color, size }) => (
@@ -26,7 +28,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="bookmarks/index"
+        name="bookmarks"
         options={{
           title: 'Bookmarks',
           tabBarIcon: ({ color, size }) => (
