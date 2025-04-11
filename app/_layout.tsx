@@ -1,9 +1,11 @@
 // app/_layout.tsx
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { BookmarkProvider } from './bookmark';
 
 export default function Layout() {
   return (
+    <BookmarkProvider>
     <Tabs>
       <Tabs.Screen
         name="index"
@@ -31,7 +33,10 @@ export default function Layout() {
             <Ionicons name="bookmark-outline" size={size} color={color} />
           ),
         }}
-      />
+/>
+
     </Tabs>
+    </BookmarkProvider>
+    
   );
 }
