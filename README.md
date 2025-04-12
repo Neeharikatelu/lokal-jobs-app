@@ -5,7 +5,6 @@ A modern **React Native** application built with **Expo** that allows users to:
 - 📋 Browse job listings fetched from an external API  
 - 🔖 Bookmark jobs for **offline** access  
 - 📄 View detailed job descriptions  
-- 🌓 Experience smooth **light/dark mode** theming  
 - 🧭 Use dynamic routing for seamless navigation  
 
 ---
@@ -17,16 +16,12 @@ A modern **React Native** application built with **Expo** that allows users to:
 - **Offline Storage:** Bookmarked jobs are saved locally using `AsyncStorage`.
 - **Job Details:** View detailed job information on a dedicated screen.
 - **Dynamic Routing:** Navigate dynamically to job detail screens via job IDs.
-- **Theming:** Supports both light and dark modes using custom theming hooks.
 
 ---
 
 ## 🛠 Installation
 
 ### ✅ Prerequisites
-
-Make sure you have the following installed:
-
 - [Node.js](https://nodejs.org/) (LTS recommended)
 - npm or yarn
 - [Expo CLI](https://docs.expo.dev/get-started/installation/)
@@ -53,7 +48,7 @@ npm install
 npx expo start
 ```
 
-###📱 Run the App on a Device
+### 📱 Run the App on a Device
 Install the Expo Go app from the App Store (iOS) or Google Play Store (Android).
 Open Expo Go and scan the QR code shown in the terminal or browser.
 
