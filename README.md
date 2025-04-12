@@ -77,8 +77,8 @@ lokal_job_app/
 ```
 
 ### 📄 Page-wise Functionality
-1. jobs.tsx — Job Listings.
-1.1 Purpose: Displays a list of jobs fetched from the API.
+#### 1. jobs.tsx — Job Listings.
+Purpose: Displays a list of jobs fetched from the API.
 
 Fetching Jobs:
 ```
@@ -88,22 +88,22 @@ const fetchJobs = async () => {
   setJobs(data.results);
 };
 ```
-Display: Uses FlatList and JobCard for each item.
-Bookmarking: Calls saveBookmark(job) from storage.ts.
+- Display: Uses FlatList and JobCard for each item.
+- Bookmarking: Calls saveBookmark(job) from storage.ts.
 
-2. bookmarks.tsx — Bookmarked Jobs
-Purpose: Display saved jobs stored offline via AsyncStorage.
-Unbookmark: Users can remove a job using removeBookmark(id).
+#### 2. bookmarks.tsx — Bookmarked Jobs
+- Purpose: Display saved jobs stored offline via AsyncStorage.
+- Unbookmark: Users can remove a job using removeBookmark(id).
 
-3. [id].tsx — Job Detail Page
-Purpose: Show detailed job info via dynamic routing.
-Routing: Uses the id parameter from the URL.
-Fetching: Loads job detail from the API or from passed props.
+#### 3. [id].tsx — Job Detail Page
+- Purpose: Show detailed job info via dynamic routing.
+- Routing: Uses the id parameter from the URL.
+- Fetching: Loads job detail from the API or from passed props.
 
-4. storage.ts — Bookmark Management
-saveBookmark(job): Save a job to AsyncStorage.
-getBookmarkedJobs(): Retrieve all bookmarked jobs.
-removeBookmark(id): Delete a job by its ID.
+#### 4. storage.ts — Bookmark Management
+- saveBookmark(job): Save a job to AsyncStorage.
+- getBookmarkedJobs(): Retrieve all bookmarked jobs.
+- removeBookmark(id): Delete a job by its ID.
 ```
 const saveBookmark = async (job) => {
   const stored = await AsyncStorage.getItem('BOOKMARKED_JOBS');
