@@ -801,16 +801,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 300,
     marginLeft: 20,
-    marginRight: 20, // Set a fixed width for the card
-   // Set a fixed height for the card
+    marginRight: 20, 
     
   },
   cardHover: {
-    transform: [{ scale: 1.05 }], // Slightly scale up the card
-    shadowColor: 'AFDDFF', // Change shadow color
+    transform: [{ scale: 1.05 }], 
+    shadowColor: '#AFDDFF', 
     shadowOpacity: 0.5,
     shadowRadius: 8,
-    elevation: 6, // Increase elevation for a lifted effect
+    elevation: 8, 
   },
 
   image: {

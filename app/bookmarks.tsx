@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, Pressable } from 'react-native';
 import { useBookmarks } from './bookmark'; // Import the useBookmarks hook
+import { Link } from 'expo-router'; 
+
 
 const Bookmarks = () => {
   const { bookmarkedJobs } = useBookmarks(); // Access bookmarked jobs
+
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -26,10 +29,11 @@ const Bookmarks = () => {
   );
 };
 
+
+
 export default Bookmarks;
 
 const styles = StyleSheet.create({
-
 
 
 container: {
@@ -42,7 +46,7 @@ container: {
     backgroundColor: '#fff',
     borderRadius: 16,
     margin: 16,
-    width: 230,
+    width: 300,
     padding: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -111,3 +115,4 @@ container: {
       },
 
 });
+

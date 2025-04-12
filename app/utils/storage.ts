@@ -33,3 +33,5 @@ export const getBookmarkedJobs = async (): Promise<any[]> => {
     return [];
   }
 };
+
+
