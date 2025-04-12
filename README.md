@@ -75,6 +75,9 @@ lokal_job_app/
 ├── app.json                     # Expo configuration
 └── package.json                 # Project dependencies and scripts
 ```
+### Entry Point
+- The app starts from index.tsx.
+- The navigation layout is defined in _layout.tsx, which uses tab navigation to switch between the Jobs and Bookmarks pages.
 
 ### 📄 Page-wise Functionality
 #### 1. jobs.tsx — Job Listings.
