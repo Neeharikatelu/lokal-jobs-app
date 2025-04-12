@@ -593,266 +593,14 @@
 
 
 
-// import React, { useState, useEffect } from 'react';
-// import { View, Text, FlatList, ActivityIndicator, StyleSheet, Pressable, Image } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
-// import { Link } from 'expo-router';
-// import { useBookmarks } from './bookmark';
-
-// type Job = {
-//   id: string;
-//   title: string;
-//   company: string;
-//   location: string;
-//   experience: string;
-//   stipend: string;
-//   description: string;
-//   image: string;
-//   skills?: string[];
-//   benefits?: string[];
-// };
-
-// const Jobs = () => {
-//   const [jobs, setJobs] = useState<Job[]>([]); // State to store job data
-//   const [loading, setLoading] = useState(false); // Loading state
-//   const [error, setError] = useState<string | null>(null); // Error state
-
-//   const { bookmarkedJobs, toggleBookmark } = useBookmarks();
-
-//   //Fetch jobs from the API
-//   const fetchJobs = async () => {
-//     setLoading(true);
-//     setError(null);
-
-//     try {
-//       const response = await fetch('https://testapi.getlokalapp.com/common/jobs?page=1');
-//       console.log('Status:', response.status); // Log HTTP status
-  
-//       if (!response.ok) {
-//         const errorText = await response.text(); // Print more detailed error
-//         console.error('API Error:', errorText);
-//         throw new Error(`HTTP error ${response.status}`);
-//       }
-  
-//       const data = await response.json();
-//       console.log('Fetched data:', JSON.stringify(data, null, 2));
-  
-//       if (!data?.results) {
-//         throw new Error("No 'results' field in response.");
-//       }
-  
-//       // Map API response to Job type
-//       const mappedJobs = data.results
-//       .filter((job: any) => job.id) // Filter out jobs without an `id`
-//       .map((job: any) => ({
-//         id: job.id.toString(),
-//         title: job.title || 'No Title', // Fallback for missing title
-//         company: job.company_name || 'Unknown Company',
-//         location: job.primary_details?.Place || 'Unknown Location',
-//         experience: job.primary_details?.Experience || 'Not Specified',
-//         stipend: job.primary_details?.Salary || 'Not Specified',
-//         description: job.other_details || job.title || 'No Description',
-//         image: job.creatives?.[0]?.file || 'https://via.placeholder.com/150', // Fallback for missing image
-//         skills: job.contentV3?.V3?.map((field: any) => field.field_value) || [],
-//         benefits: job.job_tags?.map((tag: any) => tag.value) || [],
-//       }));
-
-//       console.log('Mapped jobs:', mappedJobs); // Log the mapped jobs
-//       setJobs(mappedJobs);
-//     } catch (err) {
-//       console.error('Error fetching jobs:', err);
-//       setError('Failed to fetch jobs. Please try again later.');
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-
-
-//   // Fetch jobs on component mount
-//   useEffect(() => {
-//     fetchJobs();
-//   }, []);
-
-//   // Render a single job card
-//   const renderJob = ({ item }: { item: Job }) => (
-//     <Pressable style={styles.card}>
-//       <Image source={{ uri: item.image }} style={styles.image} />
-//       <View style={styles.info}>
-//         <Text style={styles.title}>{item.title}</Text>
-//         <Text style={styles.detail}>{item.company} • {item.location}</Text>
-//         <Text style={styles.detail}>Exp: {item.experience}</Text>
-//         <Text style={styles.detail}>💰 {item.stipend}</Text>
-
-//         {/* Render job tags */}
-//         {item.benefits?.map((benefit, index) => (
-//           <Text
-//             key={index}
-//             style={{
-//               backgroundColor: '#E7F3FE',
-//               color: '#0E56A8',
-//               padding: 4,
-//               borderRadius: 4,
-//               marginTop: 4,
-//             }}
-//           >
-//             {benefit}
-//           </Text>
-//         ))}
-
-//         {/* Render skills */}
-//         {item.skills && item.skills.length > 0 && (
-//           <Text style={styles.skills}>
-//             Skills: {item.skills.join(', ')}
-//           </Text>
-//         )}
-
-//         <Link
-//           href={{
-//             pathname: `/job-detail/${item.id}`,
-//             params: {
-//               title: item.title,
-//               location: item.location,
-//               company: item.company,
-//               experience: item.experience,
-//               salary: item.stipend,
-//               description: item.description,
-//               skills: item.skills?.join(', '),
-//               benefits: item.benefits?.join(', '),
-//             },
-//           }}
-//           style={styles.link}
-//         >
-//           View Details
-//         </Link>
-//       </View>
-//       <Pressable onPress={() => toggleBookmark(item)} style={styles.bookmarkBtn}>
-//         <Ionicons
-//           name={bookmarkedJobs.some((b) => b.id === item.id) ? 'bookmark' : 'bookmark-outline'}
-//           size={24}
-//           color="#4e91ff"
-//         />
-//       </Pressable>
-//     </Pressable>
-//   );
-
-//   // Render loading indicator
-//   const renderLoading = () => {
-//     if (!loading) return null;
-//     return <ActivityIndicator style={styles.loading} size="large" color="#4e91ff" />;
-//   };
-
-//   // Render error message
-//   const renderError = () => {
-//     if (!error) return null;
-//     return (
-//       <View style={styles.errorContainer}>
-//         <Text style={styles.errorText}>{error}</Text>
-//       </View>
-//     );
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       {renderError()}
-//       {loading && jobs.length === 0 ? (
-//         renderLoading()
-//       ) : (
-//         <FlatList
-//           data={jobs}
-//           renderItem={renderJob}
-//           keyExtractor={(item) => item.id}
-//           contentContainerStyle={styles.list}
-//         />
-//       )}
-//     </View>
-//   );
-// };
-
-// export default Jobs;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#f9f9f9',
-//     padding: 16,
-//   },
-//   list: {
-//     paddingBottom: 16,
-//   },
-//   skills: {
-//     fontSize: 14,
-//     color: '#555',
-//     marginTop: 8,
-//   },
-//   card: {
-//     backgroundColor: '#fff',
-//     borderRadius: 16,
-//     marginBottom: 16,
-//     padding: 16,
-//     shadowColor: '#000',
-//     shadowOffset: { width: 0, height: 2 },
-//     shadowOpacity: 0.1,
-//     shadowRadius: 4,
-//     elevation: 2,
-//     flexDirection: 'column',
-//     alignItems: 'flex-start',
-//   },
-//   image: {
-//     width: '100%',
-//     height: 120,
-//     borderRadius: 8,
-//     marginBottom: 12,
-//     resizeMode: 'cover',
-//   },
-//   info: {
-//     flex: 1,
-//   },
-//   title: {
-//     fontSize: 18,
-//     fontWeight: 'bold',
-//     marginBottom: 4,
-//     color: '#333',
-//   },
-//   detail: {
-//     fontSize: 14,
-//     color: '#555',
-//     marginBottom: 4,
-//   },
-//   bookmarkBtn: {
-//     position: 'absolute',
-//     top: 12,
-//     right: 12,
-//   },
-//   link: {
-//     marginTop: 12,
-//     color: '#4e91ff',
-//     fontWeight: 'bold',
-//     textDecorationLine: 'underline',
-//     fontSize: 14,
-//   },
-//   loading: {
-//     marginTop: 20,
-//   },
-//   errorContainer: {
-//     padding: 16,
-//     backgroundColor: '#ffe6e6',
-//     borderRadius: 8,
-//     marginBottom: 16,
-//   },
-//   errorText: {
-//     color: '#d9534f',
-//     fontSize: 14,
-//     textAlign: 'center',
-//   },
-// });
-
-
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, ActivityIndicator, StyleSheet, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useBookmarks } from './bookmark';
+import Hoverable from 'react-native-web-hover';
+
+
 
 type Job = {
   id: string;
@@ -1043,20 +791,34 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginBottom: 16,
     padding: 16,
-    shadowColor: '#87CEEB',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowColor: '',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
     elevation: 2,
     flexDirection: 'column',
     alignItems: 'flex-start',
+    marginTop: 20,
+    width: 300,
+    marginLeft: 20,
+    marginRight: 20, // Set a fixed width for the card
+   // Set a fixed height for the card
     
   },
+  cardHover: {
+    transform: [{ scale: 1.05 }], // Slightly scale up the card
+    shadowColor: 'AFDDFF', // Change shadow color
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    elevation: 6, // Increase elevation for a lifted effect
+  },
+
   image: {
     width: '100%',
     height: 120,
     borderRadius: 8,
     marginBottom: 12,
+    marginTop: 10,
     resizeMode: 'cover',
   },
   info: {
