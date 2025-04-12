@@ -39,7 +39,7 @@ npm install -g expo-cli
 
 ### 📥 Clone the Repository
 ```
-git clone <repository-url>
+git clone https://github.com/Neeharikatelu/lokal-jobs-app.git
 cd lokal_job_app
 ```
 
