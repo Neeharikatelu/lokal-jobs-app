@@ -41,6 +41,7 @@ container: {
     flexWrap: 'wrap',
     justifyContent: 'center',
     padding: 16,
+    backgroundColor:'#E6F7FF',
   },
   card: {
     backgroundColor: '#fff',
@@ -60,7 +61,7 @@ container: {
       transform: [{ scale: 1.05 }], 
       elevation: 40, 
       shadowColor: '#4e91ff', 
-      shadowOpacity: 0.6,
+      shadowOpacity: 0.5,
   },
   image: {
     width: '100%',

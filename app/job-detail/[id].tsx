@@ -36,8 +36,11 @@ export const config = {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#E6F7FF',
     flexGrow: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
+    
   },
   title: {
     fontSize: 20,
