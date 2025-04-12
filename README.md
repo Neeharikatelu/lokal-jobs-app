@@ -139,3 +139,31 @@ The Lokal Job App is a clean, responsive, and feature-rich job listing platform 
 It provides:
 Realtime API-driven job listings
 Local bookmarks
+
+
+
+## App Pics
+
+![Home_page](https://github.com/user-attachments/assets/d5003911-3acf-4b5b-b406-e16f0b86e59a)
+![Job_details](https://github.com/user-attachments/assets/f8b0b8c8-ae5d-4630-89fe-ef65beb8164a)
+![Jobs](https://github.com/user-attachments/assets/08d9d049-9aef-45ee-9b50-ab21a53ce02f)
+![Home_android](https://github.com/user-attachments/assets/13010412-c18f-4e0d-82c8-4316f3014caf)
+![Jobs_mock_android (2)](https://github.com/user-attachments/assets/4e7c0bfa-25a4-4637-9581-178d8b7bd7b2)
+![Bookmarks_android_mock](https://github.com/user-attachments/assets/0574b5d4-4d6e-40b3-b6a5-8ce462423ec4)
+
+
+![Job_details_android_mock](https://github.com/user-attachments/assets/3dfd1bae-31ba-4c69-9a9d-0081fd025427)
+
+![Jobs_api_android](https://github.com/user-attachments/assets/53278d43-79a5-484c-ad6e-4b974cc98a48)
+
+![Jobs_api_android_2 (2)](https://github.com/user-attachments/assets/af4020b4-91fa-4507-9d28-44307472fbd3)
+
+![Job_details_android](https://github.com/user-attachments/assets/4d5b68e5-9c27-4e47-ae8f-efc923f2686f)
+
+![Job_details_android_1](https://github.com/user-attachments/assets/25be0330-6700-43dc-90fe-5f540aba6b8a)
+
+![Bookmarks_android](https://github.com/user-attachments/assets/99dd9826-44f8-4258-b790-4f9ccc15c2d7)
+
+
+
+
