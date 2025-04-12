@@ -77,8 +77,8 @@ lokal_job_app/
 ```
 
 ### 📄 Page-wise Functionality
-1. jobs.tsx — Job Listings
-Purpose: Displays a list of jobs fetched from the API.
+1. jobs.tsx — Job Listings.
+1.1 Purpose: Displays a list of jobs fetched from the API.
 
 Fetching Jobs:
 ```
@@ -93,17 +93,9 @@ Bookmarking: Calls saveBookmark(job) from storage.ts.
 
 2. bookmarks.tsx — Bookmarked Jobs
 Purpose: Display saved jobs stored offline via AsyncStorage.
-
-Load Bookmarks:
-```
-const loadBookmarks = async () => {
-  const bookmarks = await getBookmarkedJobs();
-  setBookmarkedJobs(bookmarks);
-};
-```
 Unbookmark: Users can remove a job using removeBookmark(id).
 
-### 3. [id].tsx — Job Detail Page
+3. [id].tsx — Job Detail Page
 Purpose: Show detailed job info via dynamic routing.
 Routing: Uses the id parameter from the URL.
 Fetching: Loads job detail from the API or from passed props.
