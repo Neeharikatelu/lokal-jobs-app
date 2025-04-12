@@ -1,50 +1,151 @@
-# Welcome to your Expo app 👋
+# 🌐 Lokal Job App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern **React Native** application built with **Expo** that allows users to:
 
-## Get started
+- 📋 Browse job listings fetched from an external API  
+- 🔖 Bookmark jobs for **offline** access  
+- 📄 View detailed job descriptions  
+- 🌓 Experience smooth **light/dark mode** theming  
+- 🧭 Use dynamic routing for seamless navigation  
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+- **Job Listings:** Fetch and display jobs from a public API.
+- **Bookmark Jobs:** Save favorite jobs for later viewing.
+- **Offline Storage:** Bookmarked jobs are saved locally using `AsyncStorage`.
+- **Job Details:** View detailed job information on a dedicated screen.
+- **Dynamic Routing:** Navigate dynamically to job detail screens via job IDs.
+- **Theming:** Supports both light and dark modes using custom theming hooks.
 
-   ```bash
-    npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🛠 Installation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### ✅ Prerequisites
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Make sure you have the following installed:
 
-## Get a fresh project
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- npm or yarn
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
 
-When you're ready, run:
+Install Expo CLI globally:
 
-```bash
-npm run reset-project
+``` bash
+npm install -g expo-cli
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 📥 Clone the Repository
+```
+git clone <repository-url>
+cd lokal_job_app
+```
 
-## Learn more
+### 📦 Install Dependencies
+```
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### ▶️ Start the Development Server
+```
+npx expo start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+###📱 Run the App on a Device
+Install the Expo Go app from the App Store (iOS) or Google Play Store (Android).
+Open Expo Go and scan the QR code shown in the terminal or browser.
 
-## Join the community
+## 📁 Project Structure
+```
+lokal_job_app/
+├── app/
+│   ├── index.tsx                # Main entry point of the app
+│   ├── _layout.tsx              # Tab navigation layout
+│   ├── jobs.tsx                 # Jobs listing page
+│   ├── bookmarks.tsx            # Bookmarked jobs page
+│   ├── job-detail/[id].tsx      # Job details page (dynamic routing)
+│   ├── utils/
+│   │   └── storage.ts           # Offline storage using AsyncStorage
+│   └── bookmark.tsx             # BookmarkProvider and useBookmarks hook
+├── components/
+│   ├── JobCard.tsx              # Reusable component for job cards
+│   └── ExternalLink.tsx         # Handles external links
+├── hooks/
+│   ├── useThemeColor.ts         # Handles light/dark mode theming
+│   └── useColorScheme.ts        # Detects the user's color scheme
+├── assets/                      # Static assets (images, icons, etc.)
+├── tsconfig.json                # TypeScript configuration
+├── app.json                     # Expo configuration
+└── package.json                 # Project dependencies and scripts
+```
 
-Join our community of developers creating universal apps.
+### 📄 Page-wise Functionality
+1. jobs.tsx — Job Listings
+Purpose: Displays a list of jobs fetched from the API.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Fetching Jobs:
+```
+const fetchJobs = async () => {
+  const response = await fetch('https://testapi.getlokalapp.com/common/jobs?page=1');
+  const data = await response.json();
+  setJobs(data.results);
+};
+```
+Display: Uses FlatList and JobCard for each item.
+Bookmarking: Calls saveBookmark(job) from storage.ts.
+
+2. bookmarks.tsx — Bookmarked Jobs
+Purpose: Display saved jobs stored offline via AsyncStorage.
+
+Load Bookmarks:
+```
+const loadBookmarks = async () => {
+  const bookmarks = await getBookmarkedJobs();
+  setBookmarkedJobs(bookmarks);
+};
+```
+Unbookmark: Users can remove a job using removeBookmark(id).
+
+### 3. [id].tsx — Job Detail Page
+Purpose: Show detailed job info via dynamic routing.
+Routing: Uses the id parameter from the URL.
+Fetching: Loads job detail from the API or from passed props.
+
+4. storage.ts — Bookmark Management
+saveBookmark(job): Save a job to AsyncStorage.
+getBookmarkedJobs(): Retrieve all bookmarked jobs.
+removeBookmark(id): Delete a job by its ID.
+```
+const saveBookmark = async (job) => {
+  const stored = await AsyncStorage.getItem('BOOKMARKED_JOBS');
+  const parsed = stored ? JSON.parse(stored) : [];
+  const updated = [...parsed, job];
+  await AsyncStorage.setItem('BOOKMARKED_JOBS', JSON.stringify(updated));
+};
+```
+
+### 🌐 API Integration
+Endpoint: https://testapi.getlokalapp.com/common/jobs?page=1
+```
+const fetchJobs = async () => {
+  try {
+    const response = await fetch('https://testapi.getlokalapp.com/common/jobs?page=1');
+    const data = await response.json();
+    setJobs(data.results);
+  } catch (error) {
+    console.error('Error fetching jobs:', error);
+  }
+};
+```
+
+### 🧩 Challenges Faced
+🔌 API Integration Issues: Initially, I couldn't fetch jobs from the API. To debug, I created a mock job data array and rendered it in the UI. Once the UI worked, I successfully integrated the real API.
+📦 Offline Storage Attempt with SQLite: Initially attempted to use SQLite for offline bookmark storage, but faced compatibility and performance issues. I later shifted to using AsyncStorage, which worked seamlessly.
+
+✅ Conclusion
+The Lokal Job App is a clean, responsive, and feature-rich job listing platform built with React Native and Expo.
+It provides:
+Realtime API-driven job listings
+Local bookmarks
